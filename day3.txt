@@ -1,0 +1,220 @@
+-----------------------------------------------------------------------NAME:Vaibhav Vaidya----------------------------------------------------------------------------------------------
+//WORD FILE SAVE IN THE FORM OF TEXT FORMAT WHERE WORD FILE SAVE IN THE FORM OF BINARY FORMAT                                                                              
+
+                                                                   DATA TYPES
+
+                                                               1)TEXT DATA TYPES
+-------------------------CREATE DATABASE--------------------------------------------------------
+mysql> create database day3;
+Query OK, 1 row affected (0.23 sec)
+------------------------VIEW DATABASE------------------------------------------------------
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| day3               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| vaibhav            |
++--------------------+
+6 rows in set (0.00 sec)
+--------------------------USE THAT DATABASE----------------------------------------------------
+mysql> use day3;
+Database changed
+---------------------------------------- CREATE TABLE-----------------------------------------
+mysql> create table textdatatypes
+    -> (
+    -> A char(10),
+    -> B varchar(10),
+    -> C Text
+    -> );
+Query OK, 0 rows affected (1.11 sec)
+
+mysql> describe textdatatypes;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| A     | char(10)    | YES  |     | NULL    |       |
+| B     | varchar(10) | YES  |     | NULL    |       |
+| C     | text        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.18 sec)
+-----------------------------------INSERT DATA------------------------------------------
+ insert into textdatatypes values ('123','123','Data accepted');
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into textdatatypes values ('45','45','Data accepted');
+Query OK, 1 row affected (0.20 sec)
+-------------------------------SHOW DATA------------------------------------------------
+mysql> select * from textdatatypes;
++------+------+---------------+
+| A    | B    | C             |
++------+------+---------------+
+| 123  | 123  | Data accepted |
+| 45   | 45   | Data accepted |
++------+------+---------------+
+2 rows in set (0.00 sec)
+==============================================================================================================
+                                                           2)NUMERICAL DATATYPES
+---------------------------------------CREATE TABLE-----------------------------------------------
+mysql> create table numdatatypes
+    -> (
+    -> A tinyint,
+    -> B smallint,
+    -> C mediumint,
+    -> D int,
+    -> E bigint,
+    -> F decimal,
+    -> G double(8,2),
+    -> H float
+    -> );
+Query OK, 0 rows affected, 1 warning (0.94 sec)
+---------------------------------INSERT DATA------------------------------------------------
+mysql> insert into numdatatypes values (100,130,3345,333456,3333456,999999.99,999999.99,999999.99);
+Query OK, 1 row affected, 1 warning (0.34 sec)
+
+mysql> insert into numdatatypes values (110,243,3345,333456,3333456,999999.9,999999.99,999999.99);
+Query OK, 1 row affected, 1 warning (0.17 sec)
+
+mysql> select8 from numdatatypes;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select8 from numdatatypes' at line 1
+-------------------------------------SHOW TABLE---------------------------------------------------
+mysql> select* from numdatatypes;
++------+------+------+--------+---------+---------+-----------+---------+
+| A    | B    | C    | D      | E       | F       | G         | H       |
++------+------+------+--------+---------+---------+-----------+---------+
+|  100 |  130 | 3345 | 333456 | 3333456 | 1000000 | 999999.99 | 1000000 |
+|  110 |  243 | 3345 | 333456 | 3333456 | 1000000 | 999999.99 | 1000000 |
++------+------+------+--------+---------+---------+-----------+---------+
+2 rows in set (0.11 sec)
+=====================================================================================================================
+                                                                 3) DATE DATATYPES
+
+----------------------------create table--------------------------------
+mysql> create table datedatatypes;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table datedatatypes
+    -> (
+    -> A date,
+    -> B datetime,
+    -> C timestamp,
+    -> D time
+    -> );
+Query OK, 0 rows affected (0.87 sec)
+
+-------------------------------------insert data----------------------------
+mysql> insert into datedatatypes values
+    -> (current_date(),now(),now(),now());
+Query OK, 1 row affected (0.22 sec)
+-------------------------------------show table---------------------------
+mysql> select * from datedatatypes;
++------------+---------------------+---------------------+----------+
+| A          | B                   | C                   | D        |
++------------+---------------------+---------------------+----------+
+| 2019-08-26 | 2019-08-26 23:04:34 | 2019-08-26 23:04:34 | 23:04:34 |
++------------+---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+=============================================================================================================================
+                                                           4)ENUM
+mysql> create table spldatatypes
+    -> (
+    -> ID int auto_increment primary key,
+    -> membership Enum('silver','Gold','platinum'),
+    ->  Hobbies SET('Swimming','football','cricket','sking')
+    -> );
+Query OK, 0 rows affected (1.01 sec)
+------------------------------------------insert data--------------------------
+mysql> insert into spldatatypes
+    -> (membership,hobbies)
+    -> values
+    -> ('silver','football'); // 	(NOTE: if we want to add more hobbies this should be congtain in a whole set)
+Query OK, 1 row affected (0.09 sec)
+--------------------------------------show data-------------------
+mysql> select * from spldatatypes;
++----+------------+----------+
+| ID | membership | Hobbies  |
++----+------------+----------+
+|  1 | silver     | football |
++----+------------+----------+
+1 row in set (0.00 sec)
+-----------------------------------inserting 2nd data--------------------------------------
+
+mysql> insert into spldatatypes
+    -> (membership,hobbies)
+    -> values
+    -> ('gold','football,cricket');  // football and cricket contain in an one set
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from spldatatypes;
++----+------------+------------------+
+| ID | membership | Hobbies          |
++----+------------+------------------+
+|  1 | silver     | football         |
+|  2 | Gold       | football,cricket |
++----+------------+------------------+
+2 rows in set (0.00 sec)
+===================================================================================================================================
+                                                          5) Sorting in ASCENDING
+---------------------------------------------------create table--------------------------
+mysql> create table sorting
+    -> (
+    -> ID int,
+    -> Name varchar(5)
+    -> );
+Query OK, 0 rows affected (0.65 sec)
+-------------------------------------------------inserting data------------------------
+mysql> insert into sorting
+    -> values(1,'vv');
+Query OK, 1 row affected (0.08 sec)
+
+    -> values(2,'pp');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into sorting values(3,'gg');
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into sorting values(4,'hh');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into sorting values(5,'aa');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into sorting values(6,'dd');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into sorting values(6,'ii');
+Query OK, 1 row affected (0.18 sec)
+--------------------------------------------show data------------------------
+mysql> select * from sorting
+    -> order by name asc;
++------+------+
+| ID   | Name |
++------+------+
+|    5 | aa   |
+|    6 | dd   |
+|    3 | gg   |
+|    4 | hh   |
+|    6 | ii   |
+|    2 | pp   |
+|    1 | vv   |
++------+------+
+=============================================================================================
+                                                  6) dESCENDING 
+
+mysql> select * from sorting
+    -> order by name DESC;
++------+------+
+| ID   | Name |
++------+------+
+|    1 | vv   |
+|    2 | pp   |
+|    6 | ii   |
+|    4 | hh   |
+|    3 | gg   |
+|    6 | dd   |
+|    5 | aa   |
++------+------+
+7 rows in set (0.00 sec)
+
